@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  storable: one
+  storable_type: Storable
+
+two:
+  storable: two
+  storable_type: Storable
