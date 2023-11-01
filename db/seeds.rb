@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+StorageOption::OPTIONS.each do |obj, name|
+  StorageOption.find_or_create_by!(name: name)
+end
+
+AppConfig.create(:storage_option_id => StorageOption.first.id)
