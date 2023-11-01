@@ -5,7 +5,10 @@ services:
     user: root
     container_name: storage_app_api
     build: .
-    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "
+      bundle exec rails db:migrate &&
+      bundle exec rails db:seed &&
+      bundle exec rails s -p 3000 -b '0.0.0.0'"
     restart: on-failure:3
     ports:
     - 3001:3000
@@ -49,19 +52,3 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=ctb_api_test
-
-  redis:
-    container_name: storage_app_redis
-    image: "redis:6.2.6"
-    restart: always
-    ports:
-    - "16379:6379"
-
-  mailhog:
-    container_name: storage_app_mailhog
-    image: mailhog/mailhog
-    logging:
-      driver: 'none'  # disable saving logs
-    ports:
-      - 1026:1025 # smtp server
-      - 8026:8025 # web ui
